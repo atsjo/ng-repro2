@@ -1,6 +1,6 @@
 <button (click)="toggle1.set(!toggle1())">Direct {{toggle1()}}</button>
 @if (toggle1()) {
-  <dynamic />
+  <dynamic [counter]="counter()" />
 } @else {
   <p>not active</p>
 }
