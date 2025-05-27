@@ -1,12 +1,14 @@
-<button (click)="toggle1.set(!toggle1())">{{toggle1()}}</button>
+<button (click)="toggle1.set(!toggle1())">Direct {{toggle1()}}</button>
 @if (toggle1()) {
   <dynamic />
 } @else {
   <p>not active</p>
 }
-<button (click)="toggle2.set(!toggle2())">{{toggle2()}}</button>
+<button (click)="toggle2.set(!toggle2())">Custom Element {{toggle2()}}</button>
 @if (toggle2()) {
   <custom-element-dynamic />
 } @else {
   <p>not active</p>
 }
+<button (click)="toggle3.set(!toggle3())">Programmatic custom element {{toggle3()}}</button>
+<div #ref></div>
