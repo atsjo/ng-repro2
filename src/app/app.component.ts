@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
+import { DynamicComponent } from './dynamic.component';
 
 @Component({
   selector: 'app-root',
-  imports: [],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  imports: [DynamicComponent],
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   title = 'ng-repro';
