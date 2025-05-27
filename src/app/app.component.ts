@@ -1,11 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, Injector, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { DynamicComponent } from './dynamic.component';
+import { createCustomElement } from '@angular/elements';
 
 @Component({
   selector: 'app-root',
   imports: [DynamicComponent],
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppComponent {
-  title = 'ng-repro';
+  constructor(injector: Injector) {
+    customElements.define('custom-element-dynamic', createCustomElement(DynamicComponent, { injector }));
+  }
 }
