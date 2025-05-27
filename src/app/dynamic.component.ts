@@ -13,12 +13,12 @@ export class DynamicComponent {
 
     afterRenderEffect({
       earlyRead: () => {
-        const val = `earlyRead: ${this.counter()}`
+        const val = `earlyRead`;
         console.log(val);
         return val;
       },
       write: fromEarlyRead => {
-        const val = `write: ${fromEarlyRead()}`;
+        const val = `write: ${this.counter()} ${fromEarlyRead()}`;
         console.log(val);
         return val;
       },
