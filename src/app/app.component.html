@@ -4,11 +4,5 @@
 } @else {
   <p>not active</p>
 }
-<button (click)="toggle2.set(!toggle2())">Custom Element {{toggle2()}}</button>
-@if (toggle2()) {
-  <custom-element-dynamic />
-} @else {
-  <p>not active</p>
-}
-<button (click)="toggle3.set(!toggle3())">Programmatic custom element {{toggle3()}}</button>
+<button (click)="toggle2.set(!toggle2())">Custom element {{toggle2()}}</button>
 <div #ref></div>

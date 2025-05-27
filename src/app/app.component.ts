@@ -1,28 +1,28 @@
-import { Component, Injector, CUSTOM_ELEMENTS_SCHEMA, signal, ViewChild, ElementRef, effect } from '@angular/core';
+import { Component, Injector, signal, ViewChild, ElementRef, effect, OnInit } from '@angular/core';
 import { DynamicComponent } from './dynamic.component';
 import { createCustomElement } from '@angular/elements';
 
 @Component({
   selector: 'app-root',
   imports: [DynamicComponent],
-  templateUrl: './app.component.html',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  templateUrl: './app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   @ViewChild('ref', { static: true }) ref!: ElementRef<HTMLElement>;
-  toggle1 = signal(false);
-  toggle2 = signal(false);
-  toggle3 = signal(false);
-  constructor(injector: Injector) {
-    customElements.define('custom-element-dynamic', createCustomElement(DynamicComponent, { injector }));
+  toggle1 = signal(true);
+  toggle2 = signal(true);
+  constructor(private injector: Injector) {}
+
+  ngOnInit() {
+    const ref = this.ref.nativeElement;
+    customElements.define('custom-element-dynamic', createCustomElement(DynamicComponent, { injector: this.injector }));
     effect(() => {
-      const active = this.toggle3();
+      const active = this.toggle2();
       if (active) {
-        const el = document.createElement('custom-element-dynamic');
-        this.ref.nativeElement.appendChild(el);
+        ref.replaceChildren(document.createElement('custom-element-dynamic'));
       } else {
-        this.ref.nativeElement.replaceChildren();
+        ref.replaceChildren();
       }
-    });
+    }, { injector: this.injector });
   }
 }
