@@ -1,2 +1,12 @@
-<dynamic />
-<custom-element-dynamic />
+<button (click)="toggle1.set(!toggle1())">{{toggle1()}}</button>
+@if (toggle1()) {
+  <dynamic />
+} @else {
+  <p>not active</p>
+}
+<button (click)="toggle2.set(!toggle2())">{{toggle2()}}</button>
+@if (toggle2()) {
+  <custom-element-dynamic />
+} @else {
+  <p>not active</p>
+}
