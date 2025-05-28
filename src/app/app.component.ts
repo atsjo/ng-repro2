@@ -2,6 +2,10 @@ import { Component, Injector, signal, ViewChild, ElementRef, effect, OnInit, Inj
 import { DynamicComponent } from './dynamic.component';
 import { createCustomElement } from '@angular/elements';
 
+function delay(millis: number) {
+  return new Promise<void>(resolve => setTimeout(resolve, millis));
+}
+
 @Component({
   selector: 'app-root',
   imports: [DynamicComponent],
@@ -30,8 +34,9 @@ export class AppComponent implements OnInit {
         ctrl = undefined;
       }
     }, { injector: this.injector });
-    effect(() => {
+    effect(async () => {
       const count = this.counter();
+      await delay(500);
       if (ctrl) (ctrl as HTMLElement & { counter: number }).counter = count;
     }, { injector: this.injector });
   }
