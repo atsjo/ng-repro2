@@ -8,8 +8,6 @@ import { createCustomElement } from '@angular/elements';
   template: '',
 })
 export class AppComponent {
-  toggle1 = signal(true);
-  toggle2 = signal(true);
   counter = signal(0);
   constructor(injector: Injector, host: ElementRef<HTMLElement>) {
     customElements.define('ce-dynamic', createCustomElement(DynamicComponent, { injector }));
