@@ -1,9 +1,8 @@
-import { afterRenderEffect, Component, input, isSignal } from '@angular/core';
-import { CounterComponent } from './counter.component';
+import { afterRenderEffect, Component, input } from '@angular/core';
 
 @Component({
   selector: 'dynamic',
-  imports: [CounterComponent],
+  imports: [],
   templateUrl: './dynamic.component.html',
 })
 export class DynamicComponent {
@@ -11,9 +10,13 @@ export class DynamicComponent {
 
   constructor() {
     afterRenderEffect({
-      earlyRead: () => 'from earlyRead',
+      earlyRead: () => {
+        console.log('earlyRead');
+        return 'from earlyRead';
+      },
       write: fromEarlyRead => {
-        if (!isSignal(fromEarlyRead)) console.warn('Error passing state', fromEarlyRead);
+        const counter = this.counter();
+        console.log('write', counter, fromEarlyRead());
       }
     });
   }
