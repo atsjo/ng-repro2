@@ -1,27 +1,20 @@
-import { Component, Injector, signal, ViewChild, ElementRef, effect, OnInit, Injectable } from '@angular/core';
+import { Component, Injector, signal, ViewChild, ElementRef, effect, OnInit, Injectable, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DynamicComponent } from './dynamic.component';
 import { createCustomElement } from '@angular/elements';
-
-@Injectable()
-export class VM {
-  constructor(injector: Injector) {
-    customElements.define('custom-element-dynamic', createCustomElement(DynamicComponent, { injector }));
-  }
-}
-
 
 @Component({
   selector: 'app-root',
   imports: [DynamicComponent],
-  providers: [VM],
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppComponent implements OnInit {
   @ViewChild('ref', { static: true }) ref!: ElementRef<HTMLElement>;
   toggle1 = signal(true);
   toggle2 = signal(true);
   counter = signal(0);
-  constructor(private injector: Injector, private vm: VM) {
+  constructor(private injector: Injector) {
+    customElements.define('custom-element-dynamic', createCustomElement(DynamicComponent, { injector }));
     setInterval(() => this.counter.update(o => o + 1), 1000);
   }
 

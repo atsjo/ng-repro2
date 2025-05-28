@@ -1,8 +1,10 @@
 <button (click)="toggle1.set(!toggle1())">Direct {{toggle1()}}</button>
 @if (toggle1()) {
   <dynamic [counter]="counter()" />
+  <dynamic [counter]="counter()" />
 } @else {
-  <p>not active</p>
+  <custom-element-dynamic [counter]="counter()" />
+  <custom-element-dynamic [counter]="counter()" />
 }
 <button (click)="toggle2.set(!toggle2())">Custom element {{toggle2()}}</button>
 <div #ref></div>
