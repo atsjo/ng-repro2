@@ -15,8 +15,7 @@ export class DynamicComponent {
         return 'from earlyRead';
       },
       write: fromEarlyRead => {
-        const counter = this.counter();
-        console.log('write', counter, fromEarlyRead());
+        console.log('write', this.counter(), fromEarlyRead());
       }
     });
   }
